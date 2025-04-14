@@ -3,6 +3,9 @@ const nextConfig = {
   images: {
     remotePatterns: [{ hostname: "images.pexels.com" }],
   },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 };
 
 export default nextConfig;
