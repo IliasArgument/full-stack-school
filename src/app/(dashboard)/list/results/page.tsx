@@ -2,13 +2,12 @@
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
-import { role } from "@/lib/data";
 import {prisma} from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 
-// import { auth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 
 type ResultList = {
   id: number;
@@ -29,8 +28,8 @@ const ResultListPage = async ({
   searchParams: { [key: string]: string | undefined };
 }) => {
 
-// const { userId, sessionClaims } = auth();
-// const role = (sessionClaims?.metadata as { role?: string })?.role;
+const { userId, sessionClaims } = await auth();
+const role = (sessionClaims?.metadata as { role?: string })?.role;
 const currentUserId = 'userId';
 
 
@@ -63,14 +62,14 @@ const columns = [
     accessor: "date",
     className: "hidden md:table-cell",
   },
-  // ...(role === "admin" || role === "teacher"
-  //   ? [
-  //       {
-  //         header: "Actions",
-  //         accessor: "action",
-  //       },
-  //     ]
-  //   : []),
+  ...(role === "admin" || role === "teacher"
+    ? [
+        {
+          header: "Actions",
+          accessor: "action",
+        },
+      ]
+    : []),
 ];
 
 const renderRow = (item: ResultList) => (

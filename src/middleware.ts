@@ -11,10 +11,10 @@ console.log(matchers);
 
 export default clerkMiddleware(async (auth, req) => {
   // if (isProtectedRoute(req)) auth().protect()
-
   const { sessionClaims } = await auth();
-  const role = (sessionClaims?.metadata as { role?: string })?.role;
 
+  const role = (sessionClaims?.metadata as { role?: string })?.role;
+  // console.log(role, 'role midd', sessionClaims?.metadata)
   for (const { matcher, allowedRoles } of matchers) {
     if (matcher(req) && !allowedRoles.includes(role!)) {
       return NextResponse.redirect(new URL(`/${role}`, req.url));
