@@ -123,7 +123,7 @@ export const deleteClass = async (
 ) => {
   const id = data.get("id") as string;
 
-  console.log(id, 'id class')
+  console.log(id, "id class");
   try {
     await prisma.class.delete({
       where: {
@@ -134,7 +134,7 @@ export const deleteClass = async (
     // revalidatePath("/list/class");
     return { success: true, error: false };
   } catch (err) {
-    console.log(err, 'class err');
+    console.log(err, "class err");
     return { success: false, error: true };
   }
 };
@@ -144,7 +144,9 @@ export const createTeacher = async (
   data: TeacherSchema
 ) => {
   try {
-    const user = await clerkClient.users.createUser({
+    const client = await clerkClient();
+
+    const user = await client.users.createUser({
       username: data.username,
       password: data.password,
       firstName: data.name,

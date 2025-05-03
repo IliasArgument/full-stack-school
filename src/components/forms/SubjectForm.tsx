@@ -40,7 +40,7 @@ const SubjectForm = ({
   );
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    console.log(data, 'subject data');
     formAction(data);
   });
 
@@ -77,7 +77,7 @@ const SubjectForm = ({
             defaultValue={data?.id}
             register={register}
             error={errors?.id}
-            // hidden
+            hidden
           />
         )}
         <div className="flex flex-col gap-2 w-full md:w-1/4">
