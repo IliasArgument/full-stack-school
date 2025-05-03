@@ -42,7 +42,7 @@ const TeacherForm = ({
   );
 
   const onSubmit = handleSubmit((data) => {
-    console.log({...data, img: img?.secure_url });
+    console.log(data, "teacher form data");
     formAction({ ...data, img: img?.secure_url });
   });
 

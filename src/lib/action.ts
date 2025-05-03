@@ -123,7 +123,6 @@ export const deleteClass = async (
 ) => {
   const id = data.get("id") as string;
 
-  console.log(id, "id class");
   try {
     await prisma.class.delete({
       where: {
